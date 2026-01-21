@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Slideshow</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        
+        #slide-container {
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+            position: relative;
+            border: 5px solid #333;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 1s ease-in-out; /* The Fade Effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #slide1 { background-color: red; } 
+        #slide2 { background-color: green; }
+        #slide3 { background-color: blueviolet; } 
+
+        .active { opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <h1>Assignment 5: Slideshow</h1>
+    <p>Using <code>setInterval</code> and CSS Transitions</p>
+
+    <div id="slide-container">
+        <div id="slide1" class="slide active">Slide 1</div>
+        <div id="slide2" class="slide">Slide 2</div>
+        <div id="slide3" class="slide">Slide 3</div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 3;
+
+        setInterval(function() {
+            document.getElementById("slide" + currentSlide).classList.remove("active");
+
+            currentSlide++;
+            if (currentSlide > totalSlides) {
+                currentSlide = 1;
+            }
+
+            document.getElementById("slide" + currentSlide).classList.add("active");
+
+        }, 3000); 
+    </script>
+
+</body>
+</html>

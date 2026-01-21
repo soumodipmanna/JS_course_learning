@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pixel Painter</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #f0f0f0; }
+        
+        /* The Canvas */
+        canvas {
+            background: white;
+            border: 2px solid #000;
+            cursor: crosshair;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* The Control Panel */
+        .controls {
+            margin: 20px;
+            padding: 10px;
+            background: #ddd;
+            display: inline-block;
+            border-radius: 8px;
+        }
+        button { padding: 5px 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>Assignment 5: Pixel Painter</h1>
+    <p>Click on the canvas to draw!</p>
+
+    <div class="controls">
+        <label>Color: <input type="color" id="colorPicker" value="#ff0000"></label>
+        &nbsp;|&nbsp;
+        <label>Size: 
+            <button onclick="setSize(10)">Small</button>
+            <button onclick="setSize(20)">Medium</button>
+            <button onclick="setSize(40)">Large</button>
+        </label>
+        &nbsp;|&nbsp;
+        <button onclick="clearCanvas()">Clear Board</button>
+    </div>
+
+    <br>
+
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let currentSize = 20;
+
+        canvas.addEventListener("mousedown", function(event) {
+            // Get mouse position relative to the canvas
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            // Get selected color
+            const color = document.getElementById("colorPicker").value;
+
+            // Draw the square
+            ctx.fillStyle = color;
+                        ctx.fillRect(x - currentSize/2, y - currentSize/2, currentSize, currentSize);
+        });
+
+        function setSize(size) {
+            currentSize = size;
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+
+</body>
+</html>
